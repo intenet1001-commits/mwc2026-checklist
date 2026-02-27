@@ -13,6 +13,28 @@ export const metadata: Metadata = {
   icons: {
     apple: '/icons/apple-touch-icon.png',
   },
+  openGraph: {
+    title: 'MWC 2026 부스 방문 체크리스트',
+    description: '증권사 디지털사업부 · 바르셀로나 3/2~3/5 부스 방문 체크리스트',
+    url: 'https://mwc-blush.vercel.app',
+    siteName: 'MWC 2026 체크리스트',
+    images: [
+      {
+        url: 'https://mwc-blush.vercel.app/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'MWC 2026 부스 방문 체크리스트',
+      },
+    ],
+    locale: 'ko_KR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'MWC 2026 부스 방문 체크리스트',
+    description: '증권사 디지털사업부 · 바르셀로나 3/2~3/5',
+    images: ['https://mwc-blush.vercel.app/og-image.png'],
+  },
 }
 
 export const viewport: Viewport = {
