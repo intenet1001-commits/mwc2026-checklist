@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useChecklist } from '@/hooks/useChecklist'
 import { DayTabs } from '@/components/DayTabs'
 import { InstallBanner } from '@/components/InstallBanner'
+import { DualClock } from '@/components/DualClock'
 import { schedule } from '@/data/schedule'
 
 type Platform = 'ios' | 'android' | 'ios-inapp' | 'android-inapp' | null
@@ -85,6 +86,7 @@ export default function Home() {
 
           <h1 className="text-2xl font-bold tracking-tight">부스 방문 체크리스트</h1>
           <p className="text-sm text-blue-300 mt-0.5">기획자팀 · 전달래 권기호 이창구 이충협 최천성 양성현(직급순아님,우연의일치)</p>
+          <DualClock />
 
           {/* Overall progress */}
           <div className="mt-5 bg-blue-900/50 rounded-2xl p-4">
