@@ -18,14 +18,6 @@ export const metadata: Metadata = {
     description: 'N2 디지털사업부 · 바르셀로나 3/2~3/5 부스 방문 체크리스트',
     url: 'https://mwc-blush.vercel.app',
     siteName: 'MWC 2026 체크리스트',
-    images: [
-      {
-        url: 'https://mwc-blush.vercel.app/og-image-v2.png',
-        width: 1200,
-        height: 630,
-        alt: 'MWC 2026 부스 방문 체크리스트',
-      },
-    ],
     locale: 'ko_KR',
     type: 'website',
   },
@@ -33,7 +25,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'MWC 2026 부스 방문 체크리스트',
     description: 'N2 디지털사업부 · 바르셀로나 3/2~3/5',
-    images: ['https://mwc-blush.vercel.app/og-image-v2.png'],
+    images: ['https://mwc-blush.vercel.app/opengraph-image'],
   },
 }
 
