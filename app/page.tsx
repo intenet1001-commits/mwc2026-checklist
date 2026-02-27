@@ -129,8 +129,25 @@ export default function Home() {
         />
       </div>
 
+      {/* Spaingogo Banner */}
+      <div className="max-w-lg mx-auto px-4 pb-4">
+        <a
+          href="https://spaingogo.vercel.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-3 bg-gradient-to-r from-orange-600 to-red-600 text-white rounded-2xl px-4 py-3.5 hover:opacity-90 transition-opacity"
+        >
+          <span className="text-2xl">🇪🇸</span>
+          <div className="flex-1">
+            <p className="text-sm font-bold">배고프세요? → spaingogo</p>
+            <p className="text-xs text-orange-200">바르셀로나 맛집 · 명소 가이드</p>
+          </div>
+          <span className="text-orange-300 text-lg">›</span>
+        </a>
+      </div>
+
       {/* Footer */}
-      <div className="text-center py-8 text-xs text-slate-300 max-w-lg mx-auto px-4">
+      <div className="text-center py-6 text-xs text-slate-300 max-w-lg mx-auto px-4">
         체크 후 새로고침해도 저장됩니다 · localStorage 기반 저장
       </div>
     </div>
