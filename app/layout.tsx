@@ -20,6 +20,14 @@ export const metadata: Metadata = {
     siteName: 'MWC 2026 체크리스트',
     locale: 'ko_KR',
     type: 'website',
+    images: [
+      {
+        url: 'https://mwc-blush.vercel.app/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'MWC 2026 부스 방문 체크리스트',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
