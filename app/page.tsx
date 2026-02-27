@@ -2,6 +2,7 @@
 
 import { useChecklist } from '@/hooks/useChecklist'
 import { DayTabs } from '@/components/DayTabs'
+import { InstallBanner } from '@/components/InstallBanner'
 import { schedule } from '@/data/schedule'
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-slate-50">
+      <InstallBanner />
       {/* Header */}
       <div className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white px-4 pt-8 pb-5 safe-area-inset">
         <div className="max-w-lg mx-auto">
