@@ -3,7 +3,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'MWC 2026 체크리스트',
-  description: '증권사 디지털사업부 MWC 2026 바르셀로나 방문 부스 체크리스트',
+  description: 'N2 디지털사업부 MWC 2026 바르셀로나 방문 부스 체크리스트',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'MWC 2026 부스 방문 체크리스트',
-    description: '증권사 디지털사업부 · 바르셀로나 3/2~3/5 부스 방문 체크리스트',
+    description: 'N2 디지털사업부 · 바르셀로나 3/2~3/5 부스 방문 체크리스트',
     url: 'https://mwc-blush.vercel.app',
     siteName: 'MWC 2026 체크리스트',
     images: [
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'MWC 2026 부스 방문 체크리스트',
-    description: '증권사 디지털사업부 · 바르셀로나 3/2~3/5',
+    description: 'N2 디지털사업부 · 바르셀로나 3/2~3/5',
     images: ['https://mwc-blush.vercel.app/og-image.png'],
   },
 }

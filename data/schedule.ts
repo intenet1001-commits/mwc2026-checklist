@@ -37,7 +37,7 @@ export const schedule: Day[] = [
         duration: '45m',
         category: 'Mobile',
         description:
-          '갤럭시 S26 AI 기능 + 갤럭시 링·글라스 웨어러블 체험. 온디바이스 AI 기반 모바일 UX 혁신 파악. 증권사 MTS AI 연동 가능성 탐색.',
+          '갤럭시 S26 AI 기능 + 갤럭시 링·글라스 웨어러블 체험. 온디바이스 AI 기반 모바일 UX 혁신 파악. N2 MTS AI 연동 가능성 탐색.',
         tip: '온디바이스 AI로 어떤 금융 UX가 변하는지 / 생체인증·패스키 통합 방식 / 6G 로드맵 확인',
         boothUrl: 'https://www.mwcbarcelona.com/exhibitors/33931-samsung-electronics-co-ltd',
       },
@@ -170,7 +170,7 @@ export const schedule: Day[] = [
         category: 'Cloud',
         description:
           '5G·AI 네트워크 인프라 + Vonage 기업용 통신 API 솔루션. 텔코-AI 융합 B2B 플랫폼 동향 파악.',
-        tip: '5G 네트워크 슬라이싱 금융 서비스 적용 사례 / Vonage API 증권사 알림·인증 연동 가능성',
+        tip: '5G 네트워크 슬라이싱 금융 서비스 적용 사례 / Vonage API N2 알림·인증 연동 가능성',
         boothUrl: 'https://www.mwcbarcelona.com/exhibitors/33994-ericsson',
       },
     ],
@@ -218,7 +218,7 @@ export const schedule: Day[] = [
         category: 'AI',
         description:
           'Huawei AI 클라우드·네트워크 인프라 + 5G/6G 솔루션. 글로벌 통신·AI 기술 동향 파악.',
-        tip: 'Huawei AI 클라우드 금융 솔루션 현황 / 5G 네트워크 슬라이싱 B2B 사례 / 해외 증권사 인프라 파트너십',
+        tip: 'Huawei AI 클라우드 금융 솔루션 현황 / 5G 네트워크 슬라이싱 B2B 사례 / 해외 N2 인프라 파트너십',
         boothUrl: 'https://www.mwcbarcelona.com/exhibitors/33678-huawei-technologies-co-ltd',
       },
       {
@@ -299,7 +299,7 @@ export const schedule: Day[] = [
         category: 'Startup',
         description:
           '4YFN Top 20 결제 스타트업. 모바일 결제 혁신 솔루션. 크로스보더 결제·환전 효율화.',
-        tip: '결제 수수료 혁신 구조 상세 확인 / 증권사 CMA·환전 서비스 연동 가능성 / 규제 준수 방식',
+        tip: '결제 수수료 혁신 구조 상세 확인 / N2 CMA·환전 서비스 연동 가능성 / 규제 준수 방식',
         boothUrl: 'https://www.mwcbarcelona.com/exhibitors/35631-kistpay',
       },
       {
@@ -311,7 +311,7 @@ export const schedule: Day[] = [
         category: 'Startup',
         description:
           '4YFN Top 20 지출관리 스타트업. AI 기반 기업 지출 최적화 플랫폼. SaaS 비용 관리 자동화.',
-        tip: '법인 자산관리 서비스 연동 가능성 / 증권사 기업 고객 대상 서비스 협력 방안 논의',
+        tip: '법인 자산관리 서비스 연동 가능성 / N2 기업 고객 대상 서비스 협력 방안 논의',
         boothUrl: 'https://www.mwcbarcelona.com/exhibitors/35337-spendbase-at-4yfn',
       },
       {
