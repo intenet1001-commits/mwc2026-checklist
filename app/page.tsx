@@ -6,7 +6,7 @@ import { DayTabs } from '@/components/DayTabs'
 import { InstallBanner } from '@/components/InstallBanner'
 import { schedule } from '@/data/schedule'
 
-type Platform = 'ios' | 'android' | null
+type Platform = 'ios' | 'android' | 'ios-inapp' | 'android-inapp' | null
 
 export default function Home() {
   const { isChecked, getMemo, toggle, setMemo, isLoaded } = useChecklist()
@@ -24,6 +24,10 @@ export default function Home() {
     let detected: Platform = null
     if (/iPad|iPhone|iPod/.test(ua)) detected = 'ios'
     else if (/Android/.test(ua)) detected = 'android'
+
+    // 인앱 브라우저 감지 (카카오톡, 인스타, 라인 등)
+    const isInApp = /KAKAOTALK|Instagram|NAVER|Line\//.test(ua)
+    if (isInApp && detected) detected = detected === 'ios' ? 'ios-inapp' : 'android-inapp'
 
     if (!detected) return
     setPlatform(detected)
