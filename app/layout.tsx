@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://mwc-blush.vercel.app/opengraph-image',
+        url: 'https://mwc-blush.vercel.app/og-image-v3.png',
         width: 1200,
         height: 630,
         alt: 'MWC 2026 부스 방문 체크리스트',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'MWC 2026 부스 방문 체크리스트',
     description: 'N2 디지털사업부 · 바르셀로나 3/2~3/5',
-    images: ['https://mwc-blush.vercel.app/opengraph-image'],
+    images: ['https://mwc-blush.vercel.app/og-image-v3.png'],
   },
 }
 
