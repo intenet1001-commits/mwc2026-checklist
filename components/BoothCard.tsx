@@ -119,11 +119,11 @@ export function BoothCard({ booth, checked, memo, onToggle, onMemoChange }: Prop
               value={memo}
               onChange={e => onMemoChange(e.target.value)}
               placeholder="간단한 메모를 남겨보세요..."
-              maxLength={100}
-              rows={2}
+              maxLength={300}
+              rows={3}
               className="w-full text-sm border border-slate-200 rounded-xl px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-slate-50 placeholder:text-slate-300"
             />
-            <p className="text-xs text-slate-300 text-right mt-0.5">{memo.length}/100</p>
+            <p className="text-xs text-slate-300 text-right mt-0.5">{memo.length}/300</p>
           </div>
         </div>
       )}

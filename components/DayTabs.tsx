@@ -13,9 +13,20 @@ type Props = {
 }
 
 const DAY_LABELS = ['Day 1', 'Day 2', 'Day 3', 'Day 4']
+const EVENT_DATES: Record<string, number> = {
+  '2026-03-02': 0,
+  '2026-03-03': 1,
+  '2026-03-04': 2,
+  '2026-03-05': 3,
+}
+
+function getInitialDay(): number {
+  const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Madrid' }).format(new Date())
+  return EVENT_DATES[today] ?? 0
+}
 
 export function DayTabs({ isChecked, getMemo, onToggle, onMemoChange }: Props) {
-  const [activeDay, setActiveDay] = useState(0)
+  const [activeDay, setActiveDay] = useState(getInitialDay)
 
   const countChecked = (dayIndex: number) =>
     schedule[dayIndex].booths.filter(b => isChecked(b.id)).length
