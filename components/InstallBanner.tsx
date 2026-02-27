@@ -32,7 +32,7 @@ export function InstallBanner() {
   if (!show || isStandalone) return null
 
   return (
-    <div className="bg-blue-950 border-b border-blue-800 px-4 py-3">
+    <div className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 border-b border-blue-800 px-4 py-3">
       <div className="max-w-lg mx-auto">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1">
