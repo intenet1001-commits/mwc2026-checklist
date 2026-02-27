@@ -1,12 +1,36 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { useChecklist } from '@/hooks/useChecklist'
 import { DayTabs } from '@/components/DayTabs'
 import { InstallBanner } from '@/components/InstallBanner'
 import { schedule } from '@/data/schedule'
 
+type Platform = 'ios' | 'android' | null
+
 export default function Home() {
   const { isChecked, getMemo, toggle, setMemo, isLoaded } = useChecklist()
+  const [platform, setPlatform] = useState<Platform>(null)
+  const [bannerOpen, setBannerOpen] = useState(false)
+
+  useEffect(() => {
+    const ua = navigator.userAgent
+    const standalone =
+      (window.navigator as Navigator & { standalone?: boolean }).standalone === true ||
+      window.matchMedia('(display-mode: standalone)').matches
+
+    if (standalone) return
+
+    let detected: Platform = null
+    if (/iPad|iPhone|iPod/.test(ua)) detected = 'ios'
+    else if (/Android/.test(ua)) detected = 'android'
+
+    if (!detected) return
+    setPlatform(detected)
+
+    const dismissed = sessionStorage.getItem('install-banner-dismissed')
+    if (!dismissed) setBannerOpen(true)
+  }, [])
 
   const totalBooths = schedule.reduce((acc, d) => acc + d.booths.length, 0)
   const totalChecked = schedule.reduce(
@@ -25,15 +49,34 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <InstallBanner />
+      <InstallBanner
+        open={bannerOpen}
+        platform={platform}
+        onClose={() => {
+          sessionStorage.setItem('install-banner-dismissed', '1')
+          setBannerOpen(false)
+        }}
+      />
       {/* Header */}
       <div className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white px-4 pt-8 pb-5 safe-area-inset">
         <div className="max-w-lg mx-auto">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-xs font-semibold bg-blue-700 px-2.5 py-1 rounded-full">
-              MWC 2026
-            </span>
-            <span className="text-xs text-blue-300">바르셀로나 · 3/2(월)~3/5(목)</span>
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-semibold bg-blue-700 px-2.5 py-1 rounded-full">
+                MWC 2026
+              </span>
+              <span className="text-xs text-blue-300">바르셀로나 · 3/2(월)~3/5(목)</span>
+            </div>
+            {platform && (
+              <button
+                onClick={() => setBannerOpen(true)}
+                className="text-lg leading-none opacity-70 hover:opacity-100 transition-opacity"
+                aria-label="홈화면 추가 안내"
+                title="홈화면에 추가하는 방법"
+              >
+                📲
+              </button>
+            )}
           </div>
 
           <h1 className="text-2xl font-bold tracking-tight">부스 방문 체크리스트</h1>

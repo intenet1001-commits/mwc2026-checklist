@@ -1,35 +1,15 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+type Platform = 'ios' | 'android' | null
 
-export function InstallBanner() {
-  const [show, setShow] = useState(false)
-  const [platform, setPlatform] = useState<'ios' | 'android' | null>(null)
-  const [isStandalone, setIsStandalone] = useState(false)
+type Props = {
+  open: boolean
+  platform: Platform
+  onClose: () => void
+}
 
-  useEffect(() => {
-    const ua = navigator.userAgent
-    const standalone =
-      (window.navigator as Navigator & { standalone?: boolean }).standalone === true ||
-      window.matchMedia('(display-mode: standalone)').matches
-
-    setIsStandalone(standalone)
-
-    if (standalone) return
-
-    const dismissed = sessionStorage.getItem('install-banner-dismissed')
-    if (dismissed) return
-
-    if (/iPad|iPhone|iPod/.test(ua)) {
-      setPlatform('ios')
-      setShow(true)
-    } else if (/Android/.test(ua)) {
-      setPlatform('android')
-      setShow(true)
-    }
-  }, [])
-
-  if (!show || isStandalone) return null
+export function InstallBanner({ open, platform, onClose }: Props) {
+  if (!open || !platform) return null
 
   return (
     <div className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 border-b border-blue-800 px-4 py-3">
@@ -69,10 +49,7 @@ export function InstallBanner() {
             )}
           </div>
           <button
-            onClick={() => {
-              sessionStorage.setItem('install-banner-dismissed', '1')
-              setShow(false)
-            }}
+            onClick={onClose}
             className="text-blue-500 hover:text-blue-300 text-lg leading-none mt-0.5 shrink-0"
             aria-label="닫기"
           >
