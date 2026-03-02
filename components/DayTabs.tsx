@@ -82,24 +82,49 @@ export function DayTabs({ isChecked, getMemo, onToggle, onMemoChange }: Props) {
         </div>
 
         {activeDay === 0 && (
-          <div className="pt-2 pb-2">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-sm font-semibold text-slate-700">📋 Day 1 참관 리포트</span>
-              <a
-                href="https://web.plaud.ai/s/pub_8afd1130-d77c-48a8-8efb-07a399bd72bb::Kp5wJ_YmaxOrrpIIsqX9JmPxMhtwd1LspeLD1_c3awJ4-QD4ggsVw4nywMoYBZ2X7vRbY_ACXryKxYrYnSR3qgI"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-medium"
-              >
-                🎙️ 플라우드 노트 보기
-              </a>
+          <div className="pt-2 pb-2 space-y-4">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-semibold text-slate-700">📋 Day 1 참관 리포트</span>
+                <a
+                  href="https://web.plaud.ai/s/pub_8afd1130-d77c-48a8-8efb-07a399bd72bb::Kp5wJ_YmaxOrrpIIsqX9JmPxMhtwd1LspeLD1_c3awJ4-QD4ggsVw4nywMoYBZ2X7vRbY_ACXryKxYrYnSR3qgI"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-medium"
+                >
+                  🎙️ 플라우드 노트 보기
+                </a>
+              </div>
+              <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
+                <img
+                  src="/reviews/20260302_한장랩업.png"
+                  alt="MWC 2026 참관 리포트: AI 실용화와 데이터 자산화의 미래"
+                  className="w-full h-auto"
+                />
+              </div>
             </div>
-            <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
-              <img
-                src="/reviews/20260302_한장랩업.png"
-                alt="MWC 2026 참관 리포트: AI 실용화와 데이터 자산화의 미래"
-                className="w-full h-auto"
-              />
+            <div>
+              <p className="text-sm font-semibold text-slate-700 mb-2">🎬 키노트 다시보기</p>
+              <div className="space-y-2">
+                {[
+                  { num: 1, title: 'Leading the Future: Intelligent, Inclusive, Unstoppable', url: 'https://www.mwcbarcelona.com/agenda/sessions/6088-keynote-1-leading-the-future-intelligent-inclusive-unstoppable' },
+                  { num: 2, title: "Transforming Tomorrow's Connected World", url: 'https://www.mwcbarcelona.com/agenda/sessions/6087-keynote-2-transforming-tomorrows-connected-world' },
+                  { num: 3, title: 'The Politics of Connectivity: Governing in a Fragmented World', url: 'https://www.mwcbarcelona.com/agenda/sessions/6093-keynote-3-the-politics-of-connectivity-governing-in-a-fragmented-world' },
+                  { num: 4, title: 'What Does Strategic Tech Sovereignty Mean for Europe?', url: 'https://www.mwcbarcelona.com/agenda/sessions/6091-keynote-4-what-does-strategic-tech-sovereignty-mean-for-europe' },
+                  { num: 5, title: 'Seeing the Light: Technology, Addiction and Balance', url: 'https://www.mwcbarcelona.com/agenda/sessions/6090-keynote-5-seeing-the-light-technology-addiction-and-balance' },
+                ].map(k => (
+                  <a
+                    key={k.num}
+                    href={k.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-2 p-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-blue-50 hover:border-blue-200 transition-colors"
+                  >
+                    <span className="shrink-0 text-xs font-bold text-white bg-blue-600 rounded-full w-5 h-5 flex items-center justify-center mt-0.5">{k.num}</span>
+                    <span className="text-xs text-slate-700 leading-snug">{k.title}</span>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         )}
