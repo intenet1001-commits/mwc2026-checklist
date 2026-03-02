@@ -91,7 +91,7 @@ export function DayTabs({ isChecked, getMemo, onToggle, onMemoChange }: Props) {
                 rel="noopener noreferrer"
                 className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-medium"
               >
-                🎙️ 녹음 보기
+                🎙️ 플라우드 노트 보기
               </a>
             </div>
             <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
