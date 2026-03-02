@@ -92,6 +92,21 @@ export function DayTabs({ isChecked, getMemo, onToggle, onMemoChange }: Props) {
             onMemoChange={memo => onMemoChange(booth.id, memo)}
           />
         ))}
+
+        {activeDay === 0 && (
+          <div className="pt-2 pb-2">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-sm font-semibold text-slate-700">📋 Day 1 참관 리포트</span>
+            </div>
+            <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
+              <img
+                src="/reviews/20260302_한장랩업.png"
+                alt="MWC 2026 참관 리포트: AI 실용화와 데이터 자산화의 미래"
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
