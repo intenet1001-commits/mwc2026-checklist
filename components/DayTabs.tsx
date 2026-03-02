@@ -83,8 +83,16 @@ export function DayTabs({ isChecked, getMemo, onToggle, onMemoChange }: Props) {
 
         {activeDay === 0 && (
           <div className="pt-2 pb-2">
-            <div className="flex items-center gap-2 mb-3">
+            <div className="flex items-center justify-between mb-3">
               <span className="text-sm font-semibold text-slate-700">📋 Day 1 참관 리포트</span>
+              <a
+                href="https://web.plaud.ai/s/pub_8afd1130-d77c-48a8-8efb-07a399bd72bb::Kp5wJ_YmaxOrrpIIsqX9JmPxMhtwd1LspeLD1_c3awJ4-QD4ggsVw4nywMoYBZ2X7vRbY_ACXryKxYrYnSR3qgI"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-medium"
+              >
+                🎙️ 녹음 보기
+              </a>
             </div>
             <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
               <img
