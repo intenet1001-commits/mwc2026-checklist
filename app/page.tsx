@@ -6,6 +6,7 @@ import { DayTabs } from '@/components/DayTabs'
 import { InstallBanner } from '@/components/InstallBanner'
 import { DualClock } from '@/components/DualClock'
 import { ShuttleAlert } from '@/components/ShuttleAlert'
+import { SOSButton } from '@/components/SOSButton'
 import { schedule } from '@/data/schedule'
 
 type Platform = 'ios' | 'android' | 'ios-inapp' | 'android-inapp' | null
@@ -56,6 +57,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-50">
       <ShuttleAlert />
+      <SOSButton />
       <InstallBanner
         open={bannerOpen}
         platform={platform}
