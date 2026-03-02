@@ -81,18 +81,6 @@ export function DayTabs({ isChecked, getMemo, onToggle, onMemoChange }: Props) {
           </div>
         </div>
 
-        {/* Booth cards */}
-        {day.booths.map(booth => (
-          <BoothCard
-            key={booth.id}
-            booth={booth}
-            checked={isChecked(booth.id)}
-            memo={getMemo(booth.id)}
-            onToggle={() => onToggle(booth.id)}
-            onMemoChange={memo => onMemoChange(booth.id, memo)}
-          />
-        ))}
-
         {activeDay === 0 && (
           <div className="pt-2 pb-2">
             <div className="flex items-center gap-2 mb-3">
@@ -107,6 +95,18 @@ export function DayTabs({ isChecked, getMemo, onToggle, onMemoChange }: Props) {
             </div>
           </div>
         )}
+
+        {/* Booth cards */}
+        {day.booths.map(booth => (
+          <BoothCard
+            key={booth.id}
+            booth={booth}
+            checked={isChecked(booth.id)}
+            memo={getMemo(booth.id)}
+            onToggle={() => onToggle(booth.id)}
+            onMemoChange={memo => onMemoChange(booth.id, memo)}
+          />
+        ))}
       </div>
     </div>
   )
