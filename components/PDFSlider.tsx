@@ -78,11 +78,10 @@ export function PDFSlider({ elderlyMode = false }: PDFSliderProps) {
                   height={0}
                   sizes="(max-width: 512px) 100vw, 512px"
                   style={{
-                    width: '100%',
+                    width: elderlyMode ? '140%' : '100%',
                     height: 'auto',
-                    transform: elderlyMode ? 'scale(1.3)' : 'scale(1)',
-                    transformOrigin: 'top center',
-                    transition: 'transform 0.3s ease',
+                    marginLeft: elderlyMode ? '-20%' : '0',
+                    transition: 'width 0.3s ease, margin 0.3s ease',
                   }}
                   priority={i === 0}
                 />
