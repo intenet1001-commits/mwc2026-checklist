@@ -141,7 +141,7 @@ export default function Home() {
       </div>
 
       {/* PDF Slider */}
-      <PDFSlider />
+      <PDFSlider elderlyMode={elderlyMode} />
 
       {/* Tabs + cards */}
       <div className="max-w-lg mx-auto">

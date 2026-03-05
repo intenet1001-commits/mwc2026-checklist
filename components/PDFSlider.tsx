@@ -5,7 +5,11 @@ import Image from 'next/image'
 
 const TOTAL_PAGES = 9
 
-export function PDFSlider() {
+interface PDFSliderProps {
+  elderlyMode?: boolean
+}
+
+export function PDFSlider({ elderlyMode = false }: PDFSliderProps) {
   const [open, setOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -64,7 +68,7 @@ export function PDFSlider() {
             {Array.from({ length: TOTAL_PAGES }, (_, i) => (
               <div
                 key={i}
-                className="flex-none w-full"
+                className="flex-none w-full overflow-hidden"
                 style={{ scrollSnapAlign: 'start' }}
               >
                 <Image
@@ -73,7 +77,13 @@ export function PDFSlider() {
                   width={0}
                   height={0}
                   sizes="(max-width: 512px) 100vw, 512px"
-                  style={{ width: '100%', height: 'auto' }}
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    transform: elderlyMode ? 'scale(1.3)' : 'scale(1)',
+                    transformOrigin: 'top center',
+                    transition: 'transform 0.3s ease',
+                  }}
                   priority={i === 0}
                 />
               </div>
@@ -81,23 +91,25 @@ export function PDFSlider() {
           </div>
 
           {/* Dots indicator */}
-          <div className="flex justify-center items-center gap-1.5 py-3">
+          <div className="flex justify-center items-center gap-2 py-3">
             {Array.from({ length: TOTAL_PAGES }, (_, i) => (
               <button
                 key={i}
                 onClick={() => goTo(i)}
                 className={`rounded-full transition-all duration-200 ${
-                  i === currentPage
-                    ? 'w-4 h-2 bg-blue-600'
-                    : 'w-2 h-2 bg-slate-300'
+                  i === currentPage ? 'bg-blue-600' : 'bg-slate-300'
                 }`}
+                style={{
+                  width: i === currentPage ? (elderlyMode ? 24 : 16) : (elderlyMode ? 14 : 8),
+                  height: elderlyMode ? 10 : 8,
+                }}
                 aria-label={`페이지 ${i + 1}`}
               />
             ))}
           </div>
 
           {/* Page counter */}
-          <p className="text-center text-xs text-slate-400 pb-3">
+          <p className={`text-center text-slate-400 pb-3 ${elderlyMode ? 'text-base font-semibold' : 'text-xs'}`}>
             {currentPage + 1} / {TOTAL_PAGES}
           </p>
         </div>
