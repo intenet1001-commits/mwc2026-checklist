@@ -7,6 +7,7 @@ import { InstallBanner } from '@/components/InstallBanner'
 import { DualClock } from '@/components/DualClock'
 import { ShuttleAlert } from '@/components/ShuttleAlert'
 import { SOSButton } from '@/components/SOSButton'
+import { PDFSlider } from '@/components/PDFSlider'
 import { schedule } from '@/data/schedule'
 
 type Platform = 'ios' | 'android' | 'ios-inapp' | 'android-inapp' | null
@@ -122,6 +123,9 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* PDF Slider */}
+      <PDFSlider />
 
       {/* Tabs + cards */}
       <div className="max-w-lg mx-auto">
