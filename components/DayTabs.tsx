@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { schedule } from '@/data/schedule'
 import { BoothCard } from './BoothCard'
 import { ProgressBar } from './ProgressBar'
@@ -27,6 +27,27 @@ function getInitialDay(): number {
 
 export function DayTabs({ isChecked, getMemo, onToggle, onMemoChange }: Props) {
   const [activeDay, setActiveDay] = useState(getInitialDay)
+  const swipeTouchStartX = useRef(0)
+  const swipeTouchStartY = useRef(0)
+  const swipeTouchTime = useRef(0)
+
+  const handleSwipeStart = (e: React.TouchEvent) => {
+    if (e.touches.length !== 1) return
+    swipeTouchStartX.current = e.touches[0].clientX
+    swipeTouchStartY.current = e.touches[0].clientY
+    swipeTouchTime.current = Date.now()
+  }
+
+  const handleSwipeEnd = (e: React.TouchEvent) => {
+    if (e.changedTouches.length !== 1) return
+    const dx = e.changedTouches[0].clientX - swipeTouchStartX.current
+    const dy = e.changedTouches[0].clientY - swipeTouchStartY.current
+    const dt = Date.now() - swipeTouchTime.current
+    if (dt < 400 && Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (dx < 0) setActiveDay(d => Math.min(d + 1, schedule.length - 1))
+      else setActiveDay(d => Math.max(d - 1, 0))
+    }
+  }
 
   const countChecked = (dayIndex: number) =>
     schedule[dayIndex].booths.filter(b => isChecked(b.id)).length
@@ -68,8 +89,12 @@ export function DayTabs({ isChecked, getMemo, onToggle, onMemoChange }: Props) {
         </div>
       </div>
 
-      {/* Day content */}
-      <div className="p-4 space-y-3">
+      {/* Day content - swipeable */}
+      <div
+        className="p-4 space-y-3"
+        onTouchStart={handleSwipeStart}
+        onTouchEnd={handleSwipeEnd}
+      >
         {/* Day header */}
         <div className="mb-2">
           <div className="flex items-baseline gap-2 mb-0.5">
@@ -160,7 +185,7 @@ export function DayTabs({ isChecked, getMemo, onToggle, onMemoChange }: Props) {
             <p className="text-sm font-semibold text-slate-700 mb-2">🎬 키노트 다시보기</p>
             <div className="space-y-2">
               {[
-                { num: 1, title: 'Leading the Future: Intelligent, Inclusive, Unstoppable', url: 'https://www.mwcbarcelona.com/agenda/sessions/6088-keynote-1-leading-the-future-intelligent-inclusive-unstoppable' },
+                { num: 6, title: 'Architects of the AI Age', url: 'https://www.mwcbarcelona.com/agenda/sessions/6089-keynote-6-architects-of-the-ai-age' },
                 { num: 7, title: "Peering into Culture's Crystal Ball", url: 'https://www.mwcbarcelona.com/agenda/sessions/6086-keynote-7-peering-into-cultures-crystal-ball' },
                 { num: 8, title: 'Building the Intelligent World', url: 'https://www.mwcbarcelona.com/agenda/sessions/6215-keynote-8-building-the-intelligent-world' },
                 { num: 9, title: "Built for What's Next", url: 'https://www.mwcbarcelona.com/agenda/sessions/6094-keynote-9-built-for-whats-next' },
