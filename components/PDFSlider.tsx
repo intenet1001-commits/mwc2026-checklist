@@ -10,7 +10,11 @@ export function PDFSlider() {
   const [currentPage, setCurrentPage] = useState(0)
   const [modalPage, setModalPage] = useState<number | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const touchStartX = useRef(0)
+  const touchStartY = useRef(0)
+  const touchStartTime = useRef(0)
 
+  // 캐러셀 페이지 트래킹
   useEffect(() => {
     const el = scrollRef.current
     if (!el) return
@@ -31,6 +35,29 @@ export function PDFSlider() {
     }
     return () => { document.body.style.overflow = '' }
   }, [modalPage])
+
+  // 모달 스와이프 핸들러 (단일 터치만 처리)
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length !== 1) return
+    touchStartX.current = e.touches[0].clientX
+    touchStartY.current = e.touches[0].clientY
+    touchStartTime.current = Date.now()
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (e.changedTouches.length !== 1) return
+    const dx = e.changedTouches[0].clientX - touchStartX.current
+    const dy = e.changedTouches[0].clientY - touchStartY.current
+    const dt = Date.now() - touchStartTime.current
+    // 빠른 수평 스와이프만 페이지 전환 (핀치줌/스크롤 방해 안 함)
+    if (dt < 400 && Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (dx < 0 && modalPage !== null && modalPage < TOTAL_PAGES - 1) {
+        setModalPage(p => (p ?? 0) + 1)
+      } else if (dx > 0 && modalPage !== null && modalPage > 0) {
+        setModalPage(p => (p ?? 1) - 1)
+      }
+    }
+  }
 
   const goTo = (idx: number) => {
     const el = scrollRef.current
@@ -61,7 +88,6 @@ export function PDFSlider() {
       {/* Carousel */}
       {open && (
         <div className="mt-2 bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-          {/* Scroll container */}
           <div
             ref={scrollRef}
             className="flex overflow-x-scroll"
@@ -88,7 +114,6 @@ export function PDFSlider() {
                   style={{ width: '100%', height: 'auto' }}
                   priority={i === 0}
                 />
-                {/* 확대 힌트 */}
                 <div className="absolute bottom-2 right-2 bg-black/40 text-white text-xs px-2 py-1 rounded-full pointer-events-none">
                   🔍 탭하여 확대
                 </div>
@@ -96,7 +121,6 @@ export function PDFSlider() {
             ))}
           </div>
 
-          {/* Dots indicator */}
           <div className="flex justify-center items-center gap-1.5 py-3">
             {Array.from({ length: TOTAL_PAGES }, (_, i) => (
               <button
@@ -118,53 +142,53 @@ export function PDFSlider() {
 
       {/* Fullscreen zoom modal */}
       {modalPage !== null && (
-        <div
-          className="fixed inset-0 z-50 bg-black/95 flex flex-col"
-          style={{ touchAction: 'none' }}
-        >
+        <div className="fixed inset-0 z-50 bg-black flex flex-col">
           {/* Modal header */}
-          <div className="flex items-center justify-between px-4 py-3 flex-shrink-0">
+          <div className="flex items-center justify-between px-4 py-3 flex-shrink-0 bg-black/80">
             <span className="text-white text-sm font-medium">
               {modalPage + 1} / {TOTAL_PAGES}
             </span>
-            <div className="flex items-center gap-3">
-              {modalPage > 0 && (
-                <button
-                  onClick={() => setModalPage(p => (p ?? 1) - 1)}
-                  className="text-white text-2xl px-2"
-                >‹</button>
-              )}
-              {modalPage < TOTAL_PAGES - 1 && (
-                <button
-                  onClick={() => setModalPage(p => (p ?? 0) + 1)}
-                  className="text-white text-2xl px-2"
-                >›</button>
-              )}
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => modalPage > 0 && setModalPage(p => (p ?? 1) - 1)}
+                className={`text-2xl px-1 transition-opacity ${modalPage > 0 ? 'text-white' : 'text-white/20'}`}
+                disabled={modalPage === 0}
+              >‹</button>
+              <button
+                onClick={() => modalPage < TOTAL_PAGES - 1 && setModalPage(p => (p ?? 0) + 1)}
+                className={`text-2xl px-1 transition-opacity ${modalPage < TOTAL_PAGES - 1 ? 'text-white' : 'text-white/20'}`}
+                disabled={modalPage === TOTAL_PAGES - 1}
+              >›</button>
               <button
                 onClick={() => setModalPage(null)}
-                className="text-white text-xl w-9 h-9 rounded-full bg-white/20 flex items-center justify-center"
+                className="text-white text-lg w-9 h-9 rounded-full bg-white/20 flex items-center justify-center"
               >✕</button>
             </div>
           </div>
 
-          {/* Zoomable image area */}
+          {/* Zoomable + swipeable image area */}
           <div
-            className="flex-1 overflow-auto"
+            className="flex-1 overflow-auto flex items-center justify-center"
             style={{ touchAction: 'pan-x pan-y pinch-zoom' }}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
           >
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={`/reviews/pdf-pages/page-${String(modalPage + 1).padStart(2, '0')}.jpg`}
               alt={`AI Vision 2026 p.${modalPage + 1}`}
-              width={0}
-              height={0}
-              sizes="100vw"
-              style={{ width: '100%', height: 'auto', display: 'block' }}
-              priority
+              style={{
+                width: 'auto',
+                height: 'auto',
+                maxWidth: '100%',
+                maxHeight: 'calc(100dvh - 96px)',
+                display: 'block',
+              }}
             />
           </div>
 
-          <p className="text-center text-slate-500 text-xs py-2 flex-shrink-0">
-            두 손가락으로 핀치 확대 가능
+          <p className="text-center text-slate-600 text-xs py-2 flex-shrink-0 bg-black">
+            좌우 스와이프로 페이지 이동 · 핀치로 확대
           </p>
         </div>
       )}
