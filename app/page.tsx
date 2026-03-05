@@ -8,14 +8,12 @@ import { DualClock } from '@/components/DualClock'
 import { ShuttleAlert } from '@/components/ShuttleAlert'
 import { SOSButton } from '@/components/SOSButton'
 import { PDFSlider } from '@/components/PDFSlider'
-import { useElderlyMode } from '@/hooks/useElderlyMode'
 import { schedule } from '@/data/schedule'
 
 type Platform = 'ios' | 'android' | 'ios-inapp' | 'android-inapp' | null
 
 export default function Home() {
   const { isChecked, getMemo, toggle, setMemo, isLoaded } = useChecklist()
-  const { enabled: elderlyMode, toggle: toggleElderlyMode } = useElderlyMode()
   const [platform, setPlatform] = useState<Platform>(null)
   const [bannerOpen, setBannerOpen] = useState(false)
 
@@ -79,30 +77,16 @@ export default function Home() {
               </span>
               <span className="text-xs text-blue-300">바르셀로나 · 3/2(월)~3/5(목)</span>
             </div>
-            <div className="flex items-center gap-2">
+            {platform && (
               <button
-                onClick={toggleElderlyMode}
-                className={`text-sm font-bold px-2.5 py-1 rounded-full transition-all ${
-                  elderlyMode
-                    ? 'bg-yellow-400 text-yellow-900'
-                    : 'bg-blue-700 text-blue-200 opacity-70 hover:opacity-100'
-                }`}
-                aria-label="고령자 모드 토글"
-                title="글자 크기 확대"
+                onClick={() => setBannerOpen(true)}
+                className="text-lg leading-none opacity-70 hover:opacity-100 transition-opacity"
+                aria-label="홈화면 추가 안내"
+                title="홈화면에 추가하는 방법"
               >
-                가+
+                📲
               </button>
-              {platform && (
-                <button
-                  onClick={() => setBannerOpen(true)}
-                  className="text-lg leading-none opacity-70 hover:opacity-100 transition-opacity"
-                  aria-label="홈화면 추가 안내"
-                  title="홈화면에 추가하는 방법"
-                >
-                  📲
-                </button>
-              )}
-            </div>
+            )}
           </div>
 
           <h1 className="text-2xl font-bold tracking-tight">부스 방문 체크리스트</h1>
@@ -141,7 +125,7 @@ export default function Home() {
       </div>
 
       {/* PDF Slider */}
-      <PDFSlider elderlyMode={elderlyMode} />
+      <PDFSlider />
 
       {/* Tabs + cards */}
       <div className="max-w-lg mx-auto">

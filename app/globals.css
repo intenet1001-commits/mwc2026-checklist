@@ -9,20 +9,3 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 고령자 모드: 전체 폰트 1.25배 확대 */
-body.elderly-mode {
-  font-size: 1.25rem;
-}
-body.elderly-mode * {
-  line-height: 1.7 !important;
-}
-body.elderly-mode p,
-body.elderly-mode span,
-body.elderly-mode a,
-body.elderly-mode button,
-body.elderly-mode label,
-body.elderly-mode li {
-  font-size: 1.1em;
-}
-body.elderly-mode h1 { font-size: 1.6rem !important; }
-body.elderly-mode h2 { font-size: 1.4rem !important; }
