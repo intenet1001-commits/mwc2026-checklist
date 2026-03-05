@@ -84,7 +84,7 @@ export function PDFSlider() {
             <span className="text-xl">📄</span>
           </div>
           <div className="text-left">
-            <span className="text-base font-bold text-white">AI Vision 2026 리포트</span>
+            <span className="text-base font-bold text-white">기획팀의 MWC 4일 랩업</span>
             <span className="text-sm text-slate-400 ml-2">{TOTAL_PAGES}p</span>
           </div>
         </div>
