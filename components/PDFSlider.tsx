@@ -10,6 +10,7 @@ export function PDFSlider() {
   const [currentPage, setCurrentPage] = useState(0)
   const [modalPage, setModalPage] = useState<number | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const modalScrollRef = useRef<HTMLDivElement>(null)
   const touchStartX = useRef(0)
   const touchStartY = useRef(0)
   const touchStartTime = useRef(0)
@@ -51,10 +52,15 @@ export function PDFSlider() {
     const dt = Date.now() - touchStartTime.current
     // 빠른 수평 스와이프만 페이지 전환 (핀치줌/스크롤 방해 안 함)
     if (dt < 400 && Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      const resetScroll = () => {
+        modalScrollRef.current?.scrollTo({ top: 0, left: 0 })
+      }
       if (dx < 0 && modalPage !== null && modalPage < TOTAL_PAGES - 1) {
         setModalPage(p => (p ?? 0) + 1)
+        setTimeout(resetScroll, 0)
       } else if (dx > 0 && modalPage !== null && modalPage > 0) {
         setModalPage(p => (p ?? 1) - 1)
+        setTimeout(resetScroll, 0)
       }
     }
   }
@@ -168,6 +174,7 @@ export function PDFSlider() {
 
           {/* Zoomable + swipeable image area */}
           <div
+            ref={modalScrollRef}
             className="flex-1 overflow-auto flex items-center justify-center"
             style={{ touchAction: 'pan-x pan-y pinch-zoom' }}
             onTouchStart={handleTouchStart}
@@ -175,6 +182,7 @@ export function PDFSlider() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
+              key={modalPage}
               src={`/reviews/pdf-pages/page-${String(modalPage + 1).padStart(2, '0')}.jpg`}
               alt={`AI Vision 2026 p.${modalPage + 1}`}
               style={{
