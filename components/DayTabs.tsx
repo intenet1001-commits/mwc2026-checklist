@@ -43,7 +43,7 @@ export function DayTabs({ isChecked, getMemo, onToggle, onMemoChange }: Props) {
     const dx = e.changedTouches[0].clientX - swipeTouchStartX.current
     const dy = e.changedTouches[0].clientY - swipeTouchStartY.current
     const dt = Date.now() - swipeTouchTime.current
-    if (dt < 400 && Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+    if (dt < 500 && Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
       if (dx < 0) setActiveDay(d => Math.min(d + 1, schedule.length - 1))
       else setActiveDay(d => Math.max(d - 1, 0))
     }
@@ -92,6 +92,7 @@ export function DayTabs({ isChecked, getMemo, onToggle, onMemoChange }: Props) {
       {/* Day content - swipeable */}
       <div
         className="p-4 space-y-3"
+        style={{ touchAction: 'pan-y' }}
         onTouchStart={handleSwipeStart}
         onTouchEnd={handleSwipeEnd}
       >
