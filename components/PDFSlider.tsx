@@ -32,16 +32,16 @@ export function PDFSlider() {
       {/* Toggle Header */}
       <button
         onClick={() => setOpen(v => !v)}
-        className="w-full flex items-center justify-between bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl px-4 py-3.5 shadow-md hover:from-blue-700 hover:to-indigo-700 transition-all active:scale-[0.98]"
+        className="w-full flex items-center justify-between bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl px-5 py-4 shadow-md hover:from-blue-700 hover:to-indigo-700 transition-all active:scale-[0.98]"
       >
-        <div className="flex items-center gap-2.5">
-          <span className="text-lg">📊</span>
+        <div className="flex items-center gap-3">
+          <span className="text-2xl">📊</span>
           <div className="text-left">
-            <span className="text-sm font-bold text-white">AI Vision 2026 리포트</span>
-            <span className="text-xs text-blue-200 ml-2">{TOTAL_PAGES}p</span>
+            <span className="text-base font-bold text-white">AI Vision 2026 리포트</span>
+            <span className="text-sm text-blue-200 ml-2">{TOTAL_PAGES}p</span>
           </div>
         </div>
-        <span className="text-blue-200 text-sm font-medium">{open ? '접기 ▲' : '보기 ▼'}</span>
+        <span className="text-blue-200 text-base font-semibold">{open ? '접기 ▲' : '보기 ▼'}</span>
       </button>
 
       {/* Carousel */}
